@@ -1,0 +1,24 @@
+version: '3.0'
+services:
+  db: 
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: test@123
+      MYSQL_DATABASE: wordpress
+      MYSQL_ROOT_PASSWORD: test@123
+  wordpress:
+    image: wordpress:latest
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_PASSWORD: test@123
+      WORDPRESS_DB_USER: wordpress
+    ports:
+      - "8080:80"
+  webapp:
+    build:
+      context: ./project
+    ports:
+      - "8085:80"
